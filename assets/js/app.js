@@ -47,11 +47,8 @@ d3.csv("assets/data/data.csv")
   .then(function (statesData) {
 
     // Function is called and passes csv data
-    // d3.csv(file).then(successHandle(), errorHandle);
-    d3.csv(file).then(function (data) {
-      successHandle(data);
-    });
-  }
+    successHandle(statesData);
+  });
 
 // Function takes in argument statesData
 function successHandle(statesData) {
@@ -120,7 +117,7 @@ function successHandle(statesData) {
         .attr("class", "tooltip")
         .offset([80, -60])
         .html(function (d) {
-          return (`<br>Poverty % ${d.poverty} <br>Healthcare%: ${d.healthcare} `);
+          return (`<br>Healthcare % ${d.healthcare} <br>Poverty%: ${d.poverty} `);
         });
 
       // Step 7: Create tooltip in the chart
@@ -129,11 +126,11 @@ function successHandle(statesData) {
 
       // Step 8: Create event listeners to display and hide the tooltip
       // ==============================
-      circlesGroup.on("click", function(data) {
+      circlesGroup.on("mouseover", function (data) {
         toolTip.show(data, this);
       })
         // onmouseout event
-        .on("mouseout", function(data, index) {
+        .on("mouseout", function (data, index) {
           toolTip.hide(data);
         });
 
@@ -151,4 +148,7 @@ function successHandle(statesData) {
         .attr("class", "axisText")
         .text("In Poverty %");
 
+
+
     }
+
